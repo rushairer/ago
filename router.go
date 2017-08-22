@@ -25,14 +25,14 @@ func (router *Router) NewHandler(routes []*Route) *mux.Router{
             handler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){})
         }
 
+        if (route.Controller != nil) {
+            handler = HttpMiddleware(handler, route)
+        }
+
         if (len(route.Middlewares) > 0) {
             for _, m := range route.Middlewares {
                 handler = m(handler)
             }
-        }
-
-        if (route.Controller != nil) {
-            handler = HttpMiddleware(handler, route)
         }
 
         if (route.Method == "*" || route.Method == "") {
