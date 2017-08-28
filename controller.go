@@ -65,7 +65,7 @@ func (c *Controller) Json(value interface{}) {
     }
 }
 
-func (c *Controller) JsonNotFound(value interface{}) {
+func (c *Controller) JsonNotFound() {
     c.ResponseWriter.Header().Set("Content-Type", "application/json; charset=UTF-8")
     c.ResponseWriter.WriteHeader(http.StatusNotFound)
     if err := json.NewEncoder(c.ResponseWriter).Encode(Result404); err != nil {
@@ -73,7 +73,7 @@ func (c *Controller) JsonNotFound(value interface{}) {
     }
 }
 
-func (c *Controller) JsonForbiddon(value interface{}) {
+func (c *Controller) JsonForbiddon() {
     c.ResponseWriter.Header().Set("Content-Type", "application/json; charset=UTF-8")
     c.ResponseWriter.WriteHeader(http.StatusForbidden)
     if err := json.NewEncoder(c.ResponseWriter).Encode(Result403); err != nil {
