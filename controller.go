@@ -1,6 +1,8 @@
 package ago
 
 import (
+    "io"
+    "fmt"
     "net/http"
     "encoding/json"
 )
@@ -77,6 +79,30 @@ func (c *Controller) JsonForbiddon() {
     c.ResponseWriter.Header().Set("Content-Type", "application/json; charset=UTF-8")
     c.ResponseWriter.WriteHeader(http.StatusForbidden)
     if err := json.NewEncoder(c.ResponseWriter).Encode(Result403); err != nil {
+        panic(err)
+    }
+}
+
+func (c *Controller) HTML(html string) {
+    c.ResponseWriter.Header().Set("Content-Type", "text/html; charset=UTF-8")
+    c.ResponseWriter.WriteHeader(http.StatusOK)
+    if _, err := io.WriteString(c.ResponseWriter, html); err != nil {
+        panic(err)
+    }
+}
+
+func (c *Controller) HTMLNotFound() {
+    c.ResponseWriter.Header().Set("Content-Type", "text/html; charset=UTF-8")
+    c.ResponseWriter.WriteHeader(http.StatusNotFound)
+    if _, err := io.WriteString(c.ResponseWriter, fmt.Sprintf("%d %s", Result404.Code, Result404.Msg)); err != nil {
+        panic(err)
+    }
+}
+
+func (c *Controller) HTMLForbiddon() {
+    c.ResponseWriter.Header().Set("Content-Type", "text/html; charset=UTF-8")
+    c.ResponseWriter.WriteHeader(http.StatusForbidden)
+    if _, err := io.WriteString(c.ResponseWriter, fmt.Sprintf("%d %s", Result403.Code, Result403.Msg)); err != nil {
         panic(err)
     }
 }
