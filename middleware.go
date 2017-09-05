@@ -1,7 +1,8 @@
 package ago
 
 import (
-    "net/http"
+	"net/http"
 )
 
+//Middleware Middleware Type
 type Middleware func(handler http.Handler) http.Handler
