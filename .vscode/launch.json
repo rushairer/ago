@@ -1,0 +1,20 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch API",
+            "command": "air -d -c .air/api",
+            "type": "node-terminal",
+            "request": "launch"
+        },
+        {
+            "name": "Launch Crontab",
+            "command": "air -d -c .air/cron",
+            "type": "node-terminal",
+            "request": "launch"
+        }
+    ]
+}
